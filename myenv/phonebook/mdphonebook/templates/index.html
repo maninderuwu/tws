@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+ {% block content %}
+
+ <h1>Contacts</h1>
+ {% if contacts %}
+ <ul>
+    {% for contact in contacts %}
+    <li>{{contact.name}} <br> {{contact.number}}</li>
+    <a href="{% url 'edit' contact.id %}" class="btn btn-primary">edit contact</a>
+    <form action="{% url 'delete' contact.id %}" method="post" >
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+    {% endfor %}
+ </ul>
+ {% else %}
+ <h1>There are no contacts yet</h1>
+ <a href="{% url 'add' %}" class="btn btn-primary">Add contact</a>
+ {% endif %}
+ 
+
+{% endblock %}
